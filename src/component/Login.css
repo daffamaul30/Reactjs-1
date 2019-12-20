@@ -1,0 +1,16 @@
+.header{
+    text-align: center;
+    display: inline-block;
+}
+.Login{
+    margin: 150px 0;
+    float: right;
+}
+.Login form{
+    margin: 50px 80px;
+    padding-bottom: 50px;
+    width: 320px;        
+}
+form button{
+    float: right;
+}
