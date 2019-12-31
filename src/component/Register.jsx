@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { withRouter } from "react-router-dom";
 
 class Register extends Component {
 
@@ -34,14 +35,14 @@ class Register extends Component {
             case 'namaD':
                 this.setState({namaD: value})
                 errors.namaD =
-                    value.length == 0?
-                    'Username must be 5 characters long!': '';
+                    value.length === 0?
+                    'Value is empty': '';
                 break;
             case 'namaB':
                 this.setState.namaB = value;
                 errors.namaB =
-                    value.length == 0?
-                    'Username must be 5 characters long!': '';
+                    value.length === 0?
+                    'Value is empty': '';
                 break;
             case 'username':
                 this.setState.username = value;
@@ -63,6 +64,9 @@ class Register extends Component {
                 break;
             case 'password2':
                 this.setState.password2 = value;
+                errors.password2 =
+                    value.length < this.setState.password.length?
+                    'Password does not match!': '';
                 break;
             default:
                 break;
@@ -74,14 +78,13 @@ class Register extends Component {
 
     handleSubmit = (event) => {
         event.preventDefault();
-        const {name,value} = event.target;
         
         /*Pengecekan Username ke Database*/
         const validateForm = (errors) => {
             let valid = true;
 
             Object.values(this.state).forEach(
-                (val) => val.length == 0 && (valid = false)
+                (val) => val.length === 0 && (valid = false)
             );
 
             Object.values(errors).forEach(
@@ -91,15 +94,14 @@ class Register extends Component {
         }
 
         if(validateForm(this.state.errors)) {
-            if(!this.state.password.match(this.state.password2)){
-                alert('Password does not match!')
-            }else{
-                alert('Valid Form')
-            }
-
-
+            console.log('Valid Form');
+            this.props.history.push('/');
         }else{
-            alert('Invalid Form')
+            if(!this.state.password.match(this.state.password2)){
+                console.log('Password does not match!');
+                console.log('Invalid Form')
+            }else{
+            console.log('Invalid Form')}
         }
         
         
@@ -110,94 +112,98 @@ class Register extends Component {
     render() {
         const {errors} = this.state;
       return (
-        <div className="inner-container">
-            <form>
-                <div className="header">
-                    Register
-                </div>
-                <div className="box">
-                    <div className="form-group">
-                    <label htmlFor="nama">Full Name</label>
-                    <div className="nm">
-                    <input
-                        type="text"
-                        name="namaD"
-                        id="nmd"
-                        className="login-input"
-                        noValidate
-                        onChange={this.handleChange}
-                        placeholder="First Name"/>
-                    <input
-                        type="text"
-                        name="namaB"
-                        className="login-input"
-                        onChange={this.handleChange}
-                        noValidate
-                        placeholder="Last Name"/>
-                    </div>
-                    </div>
-                    <div className="form-group">
-                    <label htmlFor="username">Username</label>
-                    <input
-                        type="text"
-                        name="username"
-                        className="login-input"
-                        onChange={this.handleChange}
-                        noValidate
-                        placeholder="Username"/>
-                        {errors.username.length > 0 && 
-                            <span className='error'>{errors.username}</span>}
-                    </div>
-        
-                    <div className="form-group">
-                    <label htmlFor="email">Email</label>
-                    <input type="email" 
-                        name="email" 
-                        className="login-input" 
-                        onChange={this.handleChange}
-                        noValidate
-                        placeholder="Email"/>
-                    {errors.email.length > 0 && 
-                        <span className='error'>{errors.email}</span>}
-                    </div>
-        
-                    <div className="form-group">
-                    <label htmlFor="password">Password</label>
-                    <input
-                        type="password"
-                        name="password"
-                        className="login-input"
-                        onChange={this.handleChange}
-                        placeholder="Password"
-                        noValidate/>
-                    {errors.password.length > 0 && 
-                        <span className='error'>{errors.password}</span>}
-                    </div>
+        <div className="container">
 
-                    <div className="info">
-                        <small>Password must be eight characters in length.</small>
+            <div className="inner-container">
+                <form onSubmit={this.handleSubmit}>
+                    <div className="header">
+                        Register
+                        <div className="bawah"></div>
                     </div>
-                    <div className="form-group">
-                    <label htmlFor="password">Re-Enter Password</label>
-                    <input
-                        type="password"
-                        name="password2"
-                        className="login-input"
-                        onChange={this.handleChange}
-                        placeholder="Re-Enter Password"
-                        noValidate/>
+                    <div className="box">
+                        <div className="form-group">
+                        <label htmlFor="nama">Full Name</label>
+                        <div className="nm">
+                        <input
+                            type="text"
+                            name="namaD"
+                            id="nmd"
+                            className="login-input"
+                            noValidate
+                            onChange={this.handleChange}
+                            placeholder="First Name"/>
+                        <input
+                            type="text"
+                            name="namaB"
+                            className="login-input"
+                            onChange={this.handleChange}
+                            noValidate
+                            placeholder="Last Name"/>
+                        </div>
+                        </div>
+                        <div className="form-group">
+                        <label htmlFor="username">Username</label>
+                        <input
+                            type="text"
+                            name="username"
+                            className="login-input"
+                            onChange={this.handleChange}
+                            noValidate
+                            placeholder="Username"/>
+                            {errors.username.length > 0 && 
+                                <span className='error'>{errors.username}</span>}
+                        </div>
+            
+                        <div className="form-group">
+                        <label htmlFor="email">Email</label>
+                        <input type="email" 
+                            name="email" 
+                            className="login-input" 
+                            onChange={this.handleChange}
+                            noValidate
+                            placeholder="Email"/>
+                        {errors.email.length > 0 && 
+                            <span className='error'>{errors.email}</span>}
+                        </div>
+            
+                        <div className="form-group">
+                        <label htmlFor="password">Password</label>
+                        <input
+                            type="password"
+                            name="password"
+                            className="login-input"
+                            onChange={this.handleChange}
+                            placeholder="Password"
+                            noValidate/>
+                        {errors.password.length > 0 && 
+                            <span className='error'>{errors.password}</span>}
+                        </div>
+
+                        <div className="info">
+                            <small>Password must be 8 characters in length!</small>
+                        </div>
+                        <div className="form-group">
+                        <label htmlFor="password">Re-Enter Password</label>
+                        <input
+                            type="password"
+                            name="password2"
+                            className="login-input"
+                            onChange={this.handleChange}
+                            placeholder="Re-Enter Password"
+                            noValidate/>
+                        </div>
+                        
                     </div>
-                    
-                </div>
-                <button
-                    type="submit"
-                    className="btn-primary reg"
-                    onClick={this.handleSubmit}>Register</button>
-            </form>
+                    <button
+                        type="submit"
+                        className="btn btn-primary reg"
+                        >Register</button>
+                </form>
+            </div>
         </div>
         
       );
     }
   }
 
-  export default Register;
+  export default withRouter(Register);

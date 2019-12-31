@@ -1,7 +1,9 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
+import { withRouter } from "react-router-dom";
 import LoginBox from "./component/Login";
 import RegisterBox from "./component/Register";
 import "./FirstPage.css";
+import Text from "./component/LoginText"
 
 class FirstPage extends Component{
     constructor(props){
@@ -22,29 +24,36 @@ class FirstPage extends Component{
 
     render = () => {
         return(
-            <div className="root-container">
-                <div className="box-controller">
-                    <div
-                        className={"controller " + (this.state.isLoginOpen? "selected-controller": "")}
-                        onClick={this
-                        .showLoginBox.bind(this)}>
-                        Login
+            <Fragment>
+                <div className="row">
+                    <div className="col-8">
+                        <Text/>
                     </div>
-                    <div
-                        className={"controller " + (this.state.isRegisterOpen? "selected-controller": "")}
-                        onClick={this
-                        .showRegisterBox.bind(this)}>
-                        Register
+                    <div className="col root-container">
+                        <div className="box-controller">
+                            <div
+                                className={"controller " + (this.state.isLoginOpen? "selected-controller": "")}
+                                onClick={this
+                                .showLoginBox.bind(this)}>
+                                Login
+                            </div>
+                            <div
+                                className={"controller " + (this.state.isRegisterOpen? "selected-controller": "")}
+                                onClick={this
+                                .showRegisterBox.bind(this)}>
+                                Register
+                            </div>
+                        </div>
+                        <div className="box-container">
+                            {this.state.isLoginOpen && <LoginBox/>}
+                            {this.state.isRegisterOpen && <RegisterBox/>}
+                        </div>
+                        
                     </div>
                 </div>
-                <div className="box-container">
-                    {this.state.isLoginOpen && <LoginBox/>}
-                    {this.state.isRegisterOpen && <RegisterBox/>}
-                </div>
-                
-            </div>
+            </Fragment>
         )
     }
     
 }
-export default FirstPage;
+export default withRouter(FirstPage);

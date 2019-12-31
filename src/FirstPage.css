@@ -3,16 +3,54 @@
 }
 
 html,body{
-    background-color: springgreen;
+    background-color: darkslateblue;
     background-size: 100%;
     background-repeat: no-repeat;
+    overflow: hidden;
+}
+
+.line{
+    margin-top: 50px;
+    margin-right: 100px;
+    margin-left: 150px;
+}
+
+#first{
+    color: white;
+    width: 700px;
+    text-align: center;
+    background-color: black;
+    font-size: 100px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-style: italic;
+}
+
+#first2{
+    color: white;
+    width: 700px;
+    margin-top: 10px;
+    text-align: center;
+    background-color: black;
+    font-size: 80px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-style: italic;
+}
+
+#second{
+    text-align: center;
+    font-size: 30px;
+    color: white;
+    font-family: 'Courier New', Courier, monospace;
+    margin-top: 20px;
 }
 
 .root-container {
     margin-top: 70px;
     margin-right: 100px;
-    float: right;
+    display: inline-block;
     flex-direction: column;
+    overflow: hidden;
+    animation: animate2 1.5s ease-in-out;
 }
 
 .box-controller {
@@ -23,13 +61,10 @@ html,body{
     max-width: 24em;
     min-width: 21em;
     height: 35px;
-    -webkit-box-shadow: 0px 0px 20px 0px rgba(15, 15, 15, 0.2);
-    box-shadow: 0px 0px 20px 0px rgba(15, 15, 15, 0.2);
-    margin-bottom: 20px;
+    margin-bottom: 15px;
     align-items: center;
-    transition: visibility 0.5s ease-out;
     background-color: white;
-    border-top-left-radius: 6px;
+    border-top-left-radius: 9px;
 }
 
 .controller {
@@ -38,12 +73,13 @@ html,body{
     height: 100%;
     line-height: 2;
     cursor: pointer;
+    overflow: hidden;
 }
 
 .selected-controller {
     transition: border 0.5s;
     transition: ;
-    border-bottom: 5px solid #70a1ff;
+    border-bottom: 5px solid #70a1ff;;
 }
 
 .box-container {
@@ -51,8 +87,7 @@ html,body{
     flex-direction: column;
     max-width: 24em;
     min-width: 21em;
-    box-shadow: 0px 0px 100px 0px rgba(15, 15, 15, 0.2);
-    border-bottom-left-radius: 6px;
+    border-bottom-left-radius: 10px;
     padding: 24px;
     padding-top: 5px;
     background-color: white;
@@ -67,15 +102,50 @@ html,body{
 }
 
 .header {
-    align-items: center;
+    text-align: center;
     padding: 0px;
     width: 288px;
     margin-bottom: 17px;
     /* margin-left: 35px; */
     /* margin-right: 35px; */
     font-size: 22px;
-    transition: border 0.5s;
-    border-bottom: 2px solid #70a1ff;
+    overflow: hidden;
+}
+
+.header .bawah{
+    width: 288px;
+    height: 3px;
+    background-color:#70a1ff;
+    animation: animate1 3s ease-out;
+}
+
+@keyframes animate1{
+    0%{
+        transform: translateX(-100%);
+        background-color: white;
+    }
+    100%{
+        transform: translateX(0%);
+        background-color: #70a1ff;
+    }
+}
+
+@keyframes animate2{
+    0%{
+        transform: translateX(150%);
+    }
+    100%{
+        transform: translateX(0%);
+    }
+}
+
+@keyframes animate3{
+    0%{
+        transform: translateY(105%);
+    }
+    100%{
+        transform: translateY(0%);
+    }
 }
 
 .box {
@@ -116,12 +186,25 @@ small{
     margin-bottom: 5px;
 }
 
+.nm1{
+    display: inline-block;
+    flex-direction: row;
+    visibility: visible;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-bottom: -9px;
+}
+
+.nm1 #nmd1{
+    margin-right: 34px;
+}
+
 .nm .login-input{
     width: 140px;
 }
 
 .nm #nmd{
-    margin-right: 4px;
+    margin-right: 8px;
 }
 
 .login-label {
@@ -169,7 +252,7 @@ small{
     font-size: 18px;
     border-radius: 9px;
     margin-top: 10px;
-    border: 2px solid #417cef;
+    border: 2px solid white;
     transition: background-color 0.3s ease-out;
     cursor: pointer;
 }
@@ -188,15 +271,15 @@ small{
     font-size: 18px;
     border-radius: 9px;
     margin-top: 10px;
-    border: 2px solid #417cef;
+    border: 5px solid #417cef;
     transition: background-color 0.3s ease-out;
     cursor: pointer;
 }
 
-.login-btn:hover,
-.login-btn:focus {
-    background-color: #417cef;
-    color: white;
+.btn-primary:hover,
+.btn-primary:focus {
+    background-color:white;
+    color: #417cef;
 }
 
 .danger-error {

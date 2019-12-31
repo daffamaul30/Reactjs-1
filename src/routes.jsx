@@ -1,14 +1,16 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
-import login from "./FirstPage";
+import First from "./FirstPage";
+import Login from "./component/Login";
+import Home from "./HomePage";
 
 const routes = () =>{
     return(
         <Router>
-            <div>
-                <Route exact path="/" component={login} />
-            </div>
+            <Route exact path="/" component={First} />
+            <Route path="/login" component={Login}/>
+            <Route path="/dashboard" component={Home}/>
         </Router>
     )
 }
